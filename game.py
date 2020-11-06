@@ -19,7 +19,7 @@ if answer == '1':
     print("Please, enter your color code.\nYou can use red(R), green(G), blue(B), yellow(Y), white(W), purple(P)")
     print("An example guess could be: GGBB")
     print("An 'X' in the reply means a correct colour in a correct place.")
-    print("An 'O' in the reply means a correct colour in the wrong place.")
+    print("An 'O' in the reply means a correct colour in the wrong place.\n")
 elif answer == '2':
     ai = True
     game = False
@@ -36,11 +36,13 @@ colors = 'RBYGWP'  # Allowed colors
 code = ""
 for i in range(0,4):
     code += random.choice(colors)
+
 X = np.array([])
 attempts = 0
 
 while game:
-    print("Past tries:")
+    print("\n" + "*#" * 43)
+    print("\nPast tries:")
     print(X)
     print("Possible colors: {}".format(colors))
     if ai:
@@ -52,13 +54,14 @@ while game:
             print("Invalid Input")
             continue
 
+        out = False
         for i in range(len(guess)):
             if guess[i] not in colors:
                 print("{} Is invalid input, not a possible color".format(guess[i]))
-                continue
-
-    # We have a problem here, if you put in the wrong input it still count is as a attempt and stores it in the output matrix
-
+                out = True
+        if (out):
+            continue
+    
 
         if guess == code:
             print("Congratulations you did it in {} attempts".format(attempts+1))
